@@ -1,0 +1,104 @@
+<br>
+<h2 class="text-center">Componentes</h2>
+<main [class]="mainleStyle">
+  <article [class]="articleStyle">
+    <p>
+      Um componente é a unidade básica de UI do Angular: combina um template HTML, estilos CSS e
+      lógica TypeScript em um bloco encapsulado e reutilizável, identificado por um seletor
+      customizado (ex: <code>&lt;app-header&gt;</code>).
+    </p>
+  </article>
+
+  <article [class]="articleStyle">
+    <h3 [class]="h3Style">Text interpolation</h3>
+    <p>É uma maneira fácil e poderosa de exibir valore dinâmicos em seu template HTML.</p>
+    <p>
+      Ele permite que você insira valores variáveis diretamente no seu código HTML tornando a
+      exibição de dados dinamicos muito simples.
+    </p>
+  </article>
+
+  <article [class]="articleStyle">
+    <h3 [class]="h3Style">Binding</h3>
+    <p>
+      É um coneito fundamento que se refere à maneira como os dados fluem entre a parte lógica de um
+      aplicativo e a interface do usuário.
+    </p>
+    <p>
+      O binding permite conectar os dados da aplicação com os elemento do template HTM, tornando-o
+      din6amico e interativo
+    </p>
+
+    <p>Existem cinco tipos de binding:</p>
+    <ul>
+      <li>Property Binding</li>
+      <li>Attribute Binding</li>
+      <li>Class and style Binding</li>
+      <li>Event Binding</li>
+      <li>Two-way Binding</li>
+    </ul>
+  </article>
+
+  <article [class]="articleStyle"> <h3 [class]="h3Style">Template Reference Variables</h3>
+    <p>São uma maneira útil de acessar elemento do ser template HTML diretamente no código.</p>
+    <p>
+      Eles sao definidos nos elementos HTML com o uso do símbolo # seguido por um nome de variável.
+    </p>
+    <p>Isso perque que haja a comunicação entre o compornente e o template de uma forma direta.</p>
+    <br />
+    <p>Exsitem algumas formas de de uso:</p>
+    <ul>
+      <li>#nome</li>
+      <li>viewChild('nome') nome: ElemntRef</li>
+    </ul>
+    <p class="text-red-700">
+      <strong
+        >IMPORTANTE: As variáveis só devem ser usadas quando não tiver uma alternativa mais
+        adequada</strong
+      >
+    </p>
+  </article>
+
+  <article [class]="articleStyle">
+    <h3 [class]="h3Style">Control Flow</h3>
+    <p>
+      Control Flow é a sintaxe nativa do Angular (introduzida na v17) para controle de renderização
+      diretamente no template, substituindo as diretivas estruturais (*ngIf, *ngFor, *ngSwitch) por
+      blocos declarativos:
+    </p>
+    <div class="px-[2.55rem]">
+      <pre>
+
+          <code>&#64;if (condition) &#123; ... &#125; &#64;else &#123; ... &#125;
+          &#64;for (item of list; track item.id) &#123; ... &#125;
+          &#64;switch (value) &#123; &#64;case (x) &#123; ... &#125; &#125;</code>
+      </pre>
+    </div>
+  </article>
+
+  <article [class]="articleStyle">
+    <h3 [class]="h3Style">Deferrable Views</h3>
+    <p>
+      Deferrable Views é o mecanismo do Angular para carregar blocos de template de forma lazy
+      (adiada), controlando <em>quando</em> e <em>sob quais condições</em> o conteúdo é renderizado
+      e o JavaScript correspondente é baixado:
+    </p>
+    <pre>
+
+        <code>&#64;defer (on viewport) &#123;
+           &lt;app-heavy-component /&gt;
+        &#125; &#64;placeholder &#123;
+          &lt;p&gt;Carregando...&lt;/p&gt;
+        &#125; &#64;loading &#123;
+          &lt;spinner /&gt;
+        &#125; &#64;error &#123;
+          &lt;p&gt;Falhou&lt;/p&gt;
+        &#125;</code>
+    </pre>
+    <p>
+      Os gatilhos (<code>on viewport</code>, <code>on idle</code>, <code>on interaction</code>,
+      <code>when condition</code>) determinam o momento do carregamento, reduzindo o bundle inicial
+      e melhorando o LCP/TTI.
+    </p>
+  </article>
+</main>

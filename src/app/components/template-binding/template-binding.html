@@ -1,0 +1,117 @@
+<br />
+<h2 class="text-center">Template</h2>
+
+<main [class]="mainStyle">
+  <article [class]="articleStyle">
+    <p>
+      Um <strong>template</strong> é o HTML do componente que define sua estrutura visual. Ele
+      estende o HTML padrão com sintaxe própria do Angular para exibir dados dinâmicos, reagir a
+      eventos e controlar a renderização do DOM.
+    </p>
+  </article>
+  <article [class]="articleStyle">
+    <h3 [class]="h3Style">Text Interpolation</h3>
+    <p>
+      Text Interpolation é a sintaxe
+      <code ngNonBindable>{{expressão}}</code>
+      que o Angular usa para renderizar valores dinâmicos de TypeScript diretamente no template
+      HTML:
+    </p>
+
+    <pre>
+      <code ngNonBindable [class]="codeBlockStyle">      &#60;p&#62; {{usuario.nome}} &#60;/p&#62;
+      &#60;p&#62; {{2 + 2}} &#60;/p&#62;
+      &#60;p&#62; {{getTitulo()}} &#60;/p&#62;</code></pre>
+
+    <p>
+      O Angular avalia a expressão, converte para string e atualiza o DOM automaticamente quando o
+      valor muda.
+    </p>
+
+    <p>Exemplo:</p>
+    <p>No template.ts -></p>
+    <pre><code ngNonBindable [class]="codeBlockStyle">      export class TemplateBinding &#123;
+        public name: string = 'Bruno';
+        public age: number = 38;
+        public calculator(value1:number, value2:number) &#123;
+          return (
+            value1 + value2
+          )
+        &#125;
+      &#125;</code></pre>
+    <p>No template.html -></p>
+    <br />
+    <p ngNonBindable [class]="inlineCodeStyle">
+      &#60;p&#62; Olá meu nome é {{ name }} e tenho {{ age }} anos.&#60;/p&#62;
+    </p>
+    <br />
+    <p>será reideriazado no navegador da seguinte forma:</p>
+    <p class="italic">Olá meu nome é {{ name }} e tenho {{ age }} anos.</p>
+    <p>Para a função calculator:</p>
+    <br />
+    <p ngNonBindable [class]="inlineCodeStyle">
+      &#60;p&#62; A soma de 2 e 5 é {{ calculator(2, 5) }}&#60;/p&#62;
+    </p>
+    <br />
+    <p>será reideriazado no navegador da seguinte forma:</p>
+    <p class="italic">A soma de 2 e 5 é {{ calculator(2, 5) }}</p>
+    <p [class]="pStyle">
+      Este recurso deve ser usado com cautela principalmente quando é usado com dados dinamicos
+    </p>
+    <p>
+      Além dos exemplos acima é possivel usar dentro do texto interpolation expressões lógicas e
+      outras operações matemáticas, porém não é uma boa prática.
+    </p>
+  </article>
+  <article [class]="articleStyle">
+    <h3 [class]="h3Style">Property Binding</h3>
+    <p>
+      Property Binding é a sintaxe que permite definir dinamicamente propriedades de elementos HTML,
+      componentes e diretivas a partir do TypeScript, usando colchetes
+      <code>[propriedade]</code>:
+    </p>
+
+    <pre>
+      <code [class]="codeBlockStyle">      &#60;button [disabled]="!isFormValid()"&#62;Salvar&#60;/button&#62;
+      &#60;img [src]="usuario.avatarUrl" /&#62;
+      &#60;custom-slider [value]="volume" /&#62;</code></pre>
+
+    <p>
+      Sempre que o valor no TypeScript muda, o Angular atualiza automaticamente a propriedade no DOM
+      — sem necessidade de manipulação manual.
+    </p>
+    <p>Exemplo:</p>
+    <p><strong> -> desabilitado</strong></p>
+    <p>No template.ts -></p>
+    <br />
+    <p ngNonBindable [class]="inlineCodeStyle">public isDisabled = false;</p>
+    <br />
+    <p>No template.html -></p>
+    <br />
+    <p ngNonBindable [class]="inlineCodeStyle">
+      &#60;button [disabled]="isDisabled"&#62; Exemplo &#60;/button&#62;
+    </p>
+    <br />
+    <p>será reideriazado no navegador da seguinte forma:</p>
+    <button [disabled]="isDisabled" [class]="exempleButton">Exemplo</button>
+    <br />
+    <br />
+    <p><strong> -> habilitado</strong></p>
+    <p>No template.ts -></p>
+    <br />
+    <p ngNonBindable [class]="inlineCodeStyle">public isEnabled = true;</p>
+    <br />
+    <p>No template.html -></p>
+    <br />
+    <p ngNonBindable [class]="inlineCodeStyle">
+      &#60;button [disabled]="isEnabled"&#62; Exemplo &#60;/button&#62;
+    </p>
+    <br />
+    <p>será reideriazado no navegador da seguinte forma:</p>
+    <button [disabled]="isEnabled" [class]="exempleButton">Exemplo</button>
+
+    <br />
+    <br />
+    <p>Essa propriedade como já descrito pode ser usado para outras propriedades das tags html</p>
+  </article>
+</main>
