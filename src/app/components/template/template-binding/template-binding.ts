@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
-import { h3Style, pStyle, mainStyle, articleStyle, inlineCodeStyle, codeBlockStyle, exempleButton } from '../../utils/styles';
+import {
+  articleStyle,
+  codeBlockStyle,
+  exempleButton,
+  h3Style,
+  inlineCodeStyle,
+  mainStyle,
+  pStyle,
+} from '../../../utils/styles';
 
 @Component({
   selector: 'app-template-binding',
@@ -16,17 +24,14 @@ export class TemplateBinding {
   codeBlockStyle = codeBlockStyle();
   exempleButton = exempleButton();
 
-// text interpolation
+  // text interpolation
   public name: string = 'Bruno';
   public age: number = 38;
-  public calculator(value1:number, value2:number) {
-    return (
-      value1 + value2
-    )
+  public calculator(value1: number, value2: number) {
+    return value1 + value2;
   }
 
   // property binding
   public isDisabled = true;
   public isEnabled = false;
-
 }

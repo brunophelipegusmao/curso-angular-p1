@@ -1,0 +1,75 @@
+<br />
+<h2>Diretivas de Atributo</h2>
+<main [class]="mainStyle">
+  <article [class]="articleStyle">
+    <p>
+      Diretivas de Atributo são diretivas que modificam o comportamento ou a aparência de um
+      elemento HTML, componente ou outra diretiva já existente — sem alterar a estrutura do DOM. São
+      aplicadas como atributos no elemento-alvo usando o decorator
+      <code>&#64;Directive</code>.
+    </p>
+  </article>
+  <article [class]="articleStyle">
+    <h3 [class]="h3Style"><img src="icon.svg" />Classes condicionais NgClass</h3>
+    <p>
+      Classes Condicionais é a sintaxe <code>[class.nomeDaClasse]</code> que adiciona ou remove uma
+      classe CSS de um elemento com base em uma expressão booleana — a classe é aplicada quando a
+      expressão é <em>truthy</em> e removida quando é <em>falsy</em>:
+    </p>
+
+    <p><strong>TypeScript:</strong></p>
+    <pre>
+          <code [class]="codeBlockStyle">    export class AppComponent &#123;
+          isAtivo = signal(true);
+          isDestaque = signal(false);
+    &#125;</code>
+    </pre>
+
+    <p><strong>HTML:</strong></p>
+    <pre>
+      <code [class]="codeBlockStyle">   &#60;ul [class.ativo]="isAtivo()" [class.destaque]="isDestaque()"&#62;&#60;/ul&#62;
+
+    &#60;!-- multiplas classes via objeto --&#62;
+    &#60;ul [class]="&#123; ativo: isAtivo(), destaque: isDestaque() &#125;"&#62;&#60;/ul&#62;</code>
+    </pre>
+
+    <p>
+      O Angular combina inteligentemente classes estáticas, bindings diretos e classes condicionais
+      no mesmo elemento sem conflito.
+    </p>
+  </article>
+  <article [class]="articleStyle">
+    <h3 [class]="h3Style"><img src="icon.svg" />Estilos dinâmicos NgStyle</h3>
+    <p>
+      Estilo dinâmico em diretivas de atributo é a capacidade de modificar propriedades CSS de um
+      elemento diretamente pela diretiva, usando <code>[style.propriedade]</code> para um único
+      estilo ou <code>[style]</code> com um objeto para múltiplos — sem necessidade de manipular o
+      DOM manualmente:
+    </p>
+
+    <p><strong>TypeScript:</strong></p>
+    <pre>
+      <code [class]="codeBlockStyle">   &#64;Directive(&#123; selector: '[appDestaque]' &#125;)
+    export class DestaqueDirective &#123;
+      &#64;HostBinding('style.backgroundColor') bg = 'yellow';
+      &#64;HostBinding('style.color') color = 'black';
+    &#125;</code>
+</pre>
+
+    <p><strong>HTML:</strong></p>
+    <pre>
+      <code [class]="codeBlockStyle">&#60;!-- via HostBinding na diretiva --&#62;
+    &#60;p appDestaque&#62;Texto destacado&#60;/p&#62;
+
+&#60;!-- via binding direto no template --&#62;
+    &#60;p [style.color]="corTexto"&#62;Texto colorido&#60;/p&#62;
+    &#60;p [style]="&#123; color: corTexto, fontSize: tamanho &#125;"&#62;Texto estilizado&#60;/p&#62;</code>
+    </pre>
+
+    <p>
+      O Angular recomenda os bindings nativos <code>[style]</code> e
+      <code>[style.propriedade]</code> no lugar da diretiva <code>NgStyle</code> por serem mais
+      performáticos e não exigirem import adicional.
+    </p>
+  </article>
+</main>

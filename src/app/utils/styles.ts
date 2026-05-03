@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority';
 
-export const h3Style = cva('font-medium px-3 py-7 italic');
+export const h3Style = cva('font-medium px-3 py-7 italic inline-flex gap-2');
 export const pStyle = cva('text-red-600 italic');
 export const articleStyle = cva('w-full max-w-full');
 export const mainStyle = cva('w-full max-w-[62.5rem]');
