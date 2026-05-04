@@ -4,6 +4,7 @@
 @theme {
   --font-sans: 'Gelasio', serif;
   --font-display: 'Quantico', sans-serif;
+  --color-exemple: oklch(34.434% 0.12376 270.249);
 }
 
 @layer base {

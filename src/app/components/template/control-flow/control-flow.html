@@ -1,0 +1,195 @@
+<h2>Control Flow</h2>
+<main [class]="mainStyle">
+  <article [class]="articleStyle">
+    <p>
+      Control Flow é a sintaxe nativa do Angular para controlar a renderização do template de forma
+      declarativa, usando os blocos
+      <code>&#64;if</code>, <code>&#64;for</code> e <code>&#64;switch</code> diretamente no HTML —
+      substituindo definitivamente as antigas diretivas estruturais <code>*ngIf</code>,
+      <code>*ngFor</code> e <code>*ngSwitch</code>.
+    </p>
+  </article>
+
+  <section [class]="articleStyle">
+    <h3 [class]="h3Style">IF</h3>
+    <p><strong>TypeScript:</strong></p>
+    <pre>
+    <code [class]="codeBlockStyle">   export class AppComponent &#123;
+          isLogado = signal(true);
+    &#125;</code>
+  </pre>
+
+    <p><strong>HTML:</strong></p>
+    <pre>
+      <code ngNonBindable [class]="codeBlockStyle">      &#64;if (usuario$ | async; as usuario) &#123;
+  &#64;if (usuario.logado) &#123;
+    &#60;p&#62;Bem-vindo, &#123;&#123; usuario.nome &#125;&#125;!&#60;/p&#62;
+  &#125; &#64;else &#123;
+    &#60;p&#62;Acesso negado.&#60;/p&#62;
+  &#125;
+&#125; &#64;else &#123;
+  &#60;p&#62;Carregando...&#60;/p&#62;
+&#125;</code>
+
+    </pre>
+    Resultado do exemplo:
+
+    @if (isLogado) {
+      <p [class]="pStyle">Bem-vindo!</p>
+    } @else {
+      <p [class]="pStyle">Acesso negado.</p>
+    }
+    <p>
+      A sintaxe moderna com <code>&#64;if</code> foi introduzida no Angular 17. No Angular 21 ela já
+      é o padrão — o <code>*ngIf</code> é considerado legado.
+    </p>
+
+    <p>
+      Apenas a título de ilustração está abaixo como era feito o mesmo if do exeplo acima, afirmando
+      apenas que no TypeScript as declarações são as mesmas nos dois casos.
+    </p>
+
+    <pre>
+      <code [class]="codeBlockStyle">    &#60;p *ngIf="isLogado; else pendente"&#62;Bem-vindo!&#60;/p&#62;
+    &#60;ng-template #pendente&#62;
+        &#60;p&#62;Acesso negado.&#60;/p&#62;
+    &#60;/ng-template&#62;</code>
+    </pre>
+    <p class="uppercase italic text-center text-cyan-900">
+      Essa mudança trouxe melhorias em performace e em leitura de código.
+    </p>
+  </section>
+
+  <section>
+    <h3 [class]="h3Style">FOR</h3>
+    <p><strong>TypeScript:</strong></p>
+    <pre>
+      <code [class]="codeBlockStyle">    export class AppComponent &#123;
+    usuarios = signal([
+        &#123; id: 1, nome: 'Ada' &#125;,
+        &#123; id: 2, nome: 'Alan' &#125;,
+        &#123; id: 3, nome: 'Grace' &#125;,
+      ]);
+    &#125;</code>
+    </pre>
+
+    <p><strong>Nova sintaxe (Angular 17+):</strong></p>
+    <pre>
+      <code ngNonBindable [class]="codeBlockStyle">    &#64;for (usuario of (usuarios$ | async) ?? []; track usuario.id) &#123;
+      &#60;p&#62;&#123;&#123; usuario.nome &#125;&#125;&#60;/p&#62;
+    &#125; &#64;empty &#123;
+      &#60;p&#62;Nenhum usuário encontrado.&#60;/p&#62;
+    &#125;</code>
+</pre>
+
+    <p><strong>Forma antiga (legado):</strong></p>
+    <pre><code ngNonBindable [class]="codeBlockStyle">    &#60;p *ngFor="let usuario of usuarios"&#62;&#123;&#123; usuario.nome &#125;&#125;&#60;/p&#62;</code></pre>
+
+    <p>
+      O <code>track</code> é obrigatório na nova sintaxe — equivale ao <code>trackBy</code> do
+      <code>*ngFor</code> e otimiza a renderização da lista. O bloco <code>&#64;empty</code> não
+      tinha equivalente direto no <code>*ngFor</code>.
+    </p>
+    Apenas a título de ilustração está abaixo como era feito o mesmo if do exeplo acima, afirmando
+    apenas que no TypeScript as declarações são as mesmas nos dois casos.
+    <p></p>
+    @for (usuario of (usuario$ | async) ?? []; track usuario.id) {
+      <p [class]="pStyle">{{ usuario.nome }}</p>
+    } @empty {
+      <p [class]="pStyle">Nenhum usuário encontrado.</p>
+    }
+
+    <div class="py-8">
+      <p class="italic font-bold uppercase">Observações:</p>
+      <ul class="mt-3 space-y-3 border-l-4 border-cyan-700 pl-4 list-disc list-inside">
+        <li class="text-sm leading-relaxed">
+          <code>?? [] no &#64;for</code> — obrigatório pois o async pipe retorna null antes do
+          Observable emitir, e o <code>&#64;for</code> não aceita null.
+        </li>
+        <li class="text-sm leading-relaxed">
+          as usuario no <code>&#64;if</code> — o padrão recomendado pela documentação do Angular
+          para trabalhar com Observables no template, evita múltiplas subscrições.
+        </li>
+        <li class="text-sm leading-relaxed">
+          AsyncPipe no imports — no lugar do CommonModule inteiro, importe apenas o AsyncPipe — é a
+          abordagem correta em componentes standalone no Angular 21.
+        </li>
+      </ul>
+    </div>
+    <h2>For e seus valores</h2>
+    <article
+      [class]="articleStyle"
+      class="bg-exemple p-5 text-white rounded-3xl m-5 shadow-lg shadow-black/50"
+    >
+      <h3 [class]="h3Style">Track</h3>
+      <p>Aqui devemos destacar o track que possui alguns valores que merecem atenção:</p>
+      <p>
+        O <code>track</code> é obrigatório no <code>&#64;for</code> e indica ao Angular qual
+        propriedade usar para identificar cada item da lista de forma única. Com isso, quando a
+        lista muda, o Angular reutiliza os elementos DOM existentes ao invés de recriar tudo —
+        tornando a renderização mais eficiente:
+      </p>
+
+      <pre>
+        <code ngNonBindable [class]="codeBlockStyle">&#64;for (usuario of usuarios; track usuario.id) &#123;
+  &#60;p&#62;&#123;&#123; usuario.nome &#125;&#125;&#60;/p&#62;
+&#125;</code>
+</pre>
+
+      <p>
+        É o equivalente ao <code>trackBy</code> do antigo <code>*ngFor</code>, porém agora é
+        obrigatório — o Angular 21 exige sua declaração explícita. Use sempre uma propriedade única
+        como <code>id</code>. Caso o item não tenha identificador, use
+        <code>track $index</code> como alternativa.
+      </p>
+      <p>
+        O <code>&#64;for</code> disponibiliza variáveis implícitas que podem ser usadas diretamente
+        no template ou aliasadas com <code>let</code>:
+      </p>
+
+      <pre>
+        <code ngNonBindable [class]="codeBlockStyle">&#64;for (usuario of usuarios; track usuario.id; let i = $index, e = $even) &#123;
+  &#60;p&#62;&#123;&#123; i &#125;&#125; - &#123;&#123; usuario.nome &#125;&#125;&#60;/p&#62;
+&#125;</code>
+</pre>
+
+      <ul>
+        <li><code>$index</code> — posição atual do item na lista (começa em 0)</li>
+        <li><code>$count</code> — total de itens na lista</li>
+        <li><code>$first</code> — <code>true</code> se for o primeiro item</li>
+        <li><code>$last</code> — <code>true</code> se for o último item</li>
+        <li><code>$even</code> — <code>true</code> se o índice for par</li>
+        <li><code>$odd</code> — <code>true</code> se o índice for ímpar</li>
+      </ul>
+
+      <p>
+        São especialmente úteis em listas com estilos alternados, numeração visível ou
+        comportamentos distintos para o primeiro e último elemento.
+      </p>
+    </article>
+    <article
+      [class]="articleStyle"
+      class="bg-exemple p-5 text-white rounded-3xl m-5 shadow-lg shadow-black/50"
+    >
+      <h3 [class]="h3Style">For - empty</h3>
+      <p>
+        O <code>&#64;empty</code> é um bloco opcional do <code>&#64;for</code> que é renderizado
+        automaticamente quando a lista estiver vazia ou nula — eliminando a necessidade de um
+        <code>&#64;if</code> adicional para tratar esse caso:
+      </p>
+
+      <pre>
+        <code ngNonBindable [class]="codeBlockStyle">&#64;for (usuario of usuarios; track usuario.id) &#123;
+  &#60;p&#62;&#123;&#123; usuario.nome &#125;&#125;&#60;/p&#62;
+&#125; &#64;empty &#123;
+  &#60;p&#62;Nenhum usuário encontrado.&#60;/p&#62;
+&#125;</code>
+</pre>
+
+      <p>
+        Não tinha equivalente direto no antigo <code>*ngFor</code> — era necessário combinar com um
+        <code>*ngIf</code> separado para obter o mesmo comportamento.
+      </p>
+    </article>
+  </section>
+</main>

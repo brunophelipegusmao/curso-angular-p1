@@ -1,2 +1,52 @@
-<br>
+<br />
 <h2>Template Viarables</h2>
+<main [class]="mainStyle">
+  <article [class]="articleStyle">
+    <p>
+      Template Variables são variáveis declaradas diretamente no HTML com o prefixo
+      <code>#</code>, que referenciam um elemento DOM, componente, diretiva ou
+      <code>TemplateRef</code> — permitindo acessar suas propriedades e métodos em outras partes do
+      mesmo template:
+    </p>
+
+    <p><strong>HTML:</strong></p>
+    <pre>
+    <code [class]="codeBlockStyle">    &#60;!-- referencia a um elemento DOM --&#62;
+    &#60;input #taskInput placeholder="Digite a tarefa" /&#62;
+    &#60;button (click)="adicionarTarefa(taskInput.value)"&#62;Adicionar&#60;/button&#62;
+
+    &#60;!-- referencia a um componente --&#62;
+    &#60;app-form #meuForm /&#62;
+    &#60;button (click)="meuForm.submit()"&#62;Enviar&#60;/button&#62;</code>
+  </pre>
+
+    <p><strong>TypeScript:</strong></p>
+    <pre>
+    <code [class]="codeBlockStyle">    export class AppComponent &#123;
+      adicionarTarefa(tarefa: string): void &#123;
+        console.log(tarefa);
+      &#125;
+    &#125;</code>
+  </pre>
+
+    <p>
+      A variável só é acessível dentro do template onde foi declarada e não está disponível no
+      TypeScript do componente.
+    </p>
+
+    <p>Outra abordagem para usarmos as Templates Variábles é:</p>
+    <p><strong>HTML:</strong></p>
+    <pre>
+      <code ngNonBindable [class]="codeBlockStyle">    &#60;h2 #variable&#62; Template Variables&#60;/h2&#62;
+    &#123;&#123; variable.innerText &#125;&#125;</code>
+    </pre>
+    <p><strong>TypeScript:</strong></p>
+    <pre>
+      <code ngNonBindable [class]="codeBlockStyle">     &#64;ViewChild('h2')
+     public nameH2!: ElementRef;
+     ngAfterViewInit() &#123;
+       console.log(this.nameH2.nativeElement.innerText);
+     &#125; </code>
+    </pre>
+  </article>
+</main>

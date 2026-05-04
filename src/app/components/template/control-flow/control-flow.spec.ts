@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TemplateBinding } from './template-binding';
+import { ControlFlow } from './control-flow';
 
-describe('AttributeDirectives', () => {
-  let component: TemplateBinding;
-  let fixture: ComponentFixture<TemplateBinding>;
+describe('ControlFlow', () => {
+  let component: ControlFlow;
+  let fixture: ComponentFixture<ControlFlow>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TemplateBinding],
+      imports: [ControlFlow],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TemplateBinding);
+    fixture = TestBed.createComponent(ControlFlow);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
