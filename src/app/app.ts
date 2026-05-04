@@ -5,11 +5,12 @@ import { TemplateBinding } from './components/template/template-binding/template
 import { AttributeDirectives } from './components/template/attribute-directives/attribute-directives';
 import { TemplateVariables } from './components/template/template-variables/template-variables';
 import { ControlFlow } from "./components/template/control-flow/control-flow";
+import { DeferrableViews } from "./components/template/deferrable-views/deferrable-views";
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NewComponent, TemplateBinding, AttributeDirectives, TemplateVariables, ControlFlow],
+  imports: [RouterOutlet, NewComponent, TemplateBinding, AttributeDirectives, TemplateVariables, ControlFlow, DeferrableViews],
   template: `
     <!-- <router-outlet/> -->
     <h1>Curso Angular</h1>
@@ -17,7 +18,8 @@ import { ControlFlow } from "./components/template/control-flow/control-flow";
     <!-- <app-template-binding/> -->
     <!-- <app-attribute-directives /> -->
     <!-- <app-template-variables /> -->
-    <app-control-flow />
+    <!-- <app-control-flow /> -->
+     <app-deferrable-views />
   `,
 })
 export class App {

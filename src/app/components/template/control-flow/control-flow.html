@@ -9,9 +9,9 @@
       <code>*ngFor</code> e <code>*ngSwitch</code>.
     </p>
   </article>
-
+  <!----------------------------------------- IF ------------------------------------->
   <section [class]="articleStyle">
-    <h3 [class]="h3Style">IF</h3>
+    <h3 [class]="h3Style"><img src="icon.svg" />IF</h3>
     <p><strong>TypeScript:</strong></p>
     <pre>
     <code [class]="codeBlockStyle">   export class AppComponent &#123;
@@ -59,9 +59,9 @@
       Essa mudança trouxe melhorias em performace e em leitura de código.
     </p>
   </section>
-
+  <!----------------------------------------- FOR ------------------------------------>
   <section>
-    <h3 [class]="h3Style">FOR</h3>
+    <h3 [class]="h3Style"><img src="icon.svg" />FOR</h3>
     <p><strong>TypeScript:</strong></p>
     <pre>
       <code [class]="codeBlockStyle">    export class AppComponent &#123;
@@ -191,5 +191,35 @@
         <code>*ngIf</code> separado para obter o mesmo comportamento.
       </p>
     </article>
+  </section>
+  <!--------------------------------- SWITCH CASE ---------------------------------->
+  <section>
+    <h3 [class]="h3Style"><img src="icon.svg" />Switch Case</h3>
+    <p>
+      O <code>&#64;switch</code> renderiza um bloco do template com base no valor de uma expressão,
+      comparando-o com cada <code>&#64;case</code> usando o operador <code>===</code>. Substitui o
+      antigo <code>*ngSwitch</code> com uma sintaxe mais direta e sem necessidade de
+      <code>break</code> — não há fallthrough entre casos:
+    </p>
+
+    <pre>
+      <code [class]="codeBlockStyle">   &#64;switch (status) &#123;
+      &#64;case ('ativo') &#123;
+        &#60;p&#62;Usuário ativo.&#60;/p&#62;
+      &#125;
+      &#64;case ('inativo') &#123;
+        &#60;p&#62;Usuário inativo.&#60;/p&#62;
+      &#125;
+      &#64;default &#123;
+        &#60;p&#62;Status desconhecido.&#60;/p&#62;
+      &#125;
+    &#125;</code>
+    </pre>
+
+    <p>
+      O bloco <code>&#64;default</code> é opcional — se nenhum <code>&#64;case</code> corresponder e
+      não houver <code>&#64;default</code>, nada é renderizado. Múltiplas condições para um mesmo
+      bloco podem ser declaradas com <code>&#64;case</code> consecutivos.
+    </p>
   </section>
 </main>

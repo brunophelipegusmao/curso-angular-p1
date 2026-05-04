@@ -1,0 +1,35 @@
+<h2>Deferrable Views</h2>
+<main [class]="mainStyle">
+  <section>
+  <p>
+    Deferrable Views é o mecanismo do Angular para carregar blocos do template de forma lazy — o
+    conteúdo e seu JavaScript só são baixados quando necessário, reduzindo o bundle inicial e
+    melhorando a performance. Usa o bloco <code>&#64;defer</code> com blocos auxiliares para
+    controlar cada estado do carregamento:
+  </p>
+
+  <pre>
+    <code [class]="codeBlockStyle">     &#64;defer (on viewport) &#123;
+        &#60;app-comentarios /&#62;
+      &#125; &#64;placeholder (minimum 1s) &#123;
+        &#60;p&#62;Placeholder antes de carregar&#60;/p&#62;
+      &#125; &#64;loading (minimum 1s; after 500ms) &#123;
+        &#60;p&#62;Carregando...&#60;/p&#62;
+      &#125; &#64;error &#123;
+        &#60;p&#62;Falha ao carregar.&#60;/p&#62;
+      &#125;</code>
+  </pre>
+
+  <ul>
+    <li><code>&#64;placeholder</code> — exibido antes do carregamento iniciar</li>
+    <li><code>&#64;loading</code> — exibido durante o carregamento</li>
+    <li><code>&#64;error</code> — exibido se o carregamento falhar</li>
+  </ul>
+
+  <p>
+    Os gatilhos disponíveis são <code>on viewport</code> (quando o elemento entra na tela),
+    <code>on idle</code> (quando o browser está ocioso), <code>on interaction</code> (quando o
+    usuário interage) e <code>when condition</code> (quando uma expressão booleana for verdadeira).
+  </p>
+</section>
+</main>
